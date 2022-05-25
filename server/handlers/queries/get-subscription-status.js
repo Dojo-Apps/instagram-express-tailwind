@@ -1,5 +1,5 @@
 import "isomorphic-fetch";
-import { gql } from "apollo-boost";
+// import { gql } from "apollo-boost";
 
 export function GET_SUBSCRIPTION_CHECK(id) {
   return `query {

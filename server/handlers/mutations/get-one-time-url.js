@@ -1,8 +1,8 @@
 import "isomorphic-fetch";
-import { gql } from "apollo-boost";
+// import { gql } from "apollo-boost";
 
 export function ONETIME_CREATE(url) {
-  return gql`
+  return `
     mutation {
       appPurchaseOneTimeCreate(
         name: "test"

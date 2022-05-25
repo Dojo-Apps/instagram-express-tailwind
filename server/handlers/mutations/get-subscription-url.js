@@ -1,5 +1,5 @@
 import "isomorphic-fetch";
-import { gql } from "apollo-boost";
+// import { gql } from "apollo-boost";
 
 export function RECURRING_CREATE(url, freeDays) {
   return `
