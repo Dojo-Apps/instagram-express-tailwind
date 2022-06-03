@@ -15,6 +15,7 @@ import translations from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/build/esm/styles.css";
 import "../styles/global.css";
 import "../styles/styles.css";
+import "../styles/help-modal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import HomePage from "./components/HomePage";

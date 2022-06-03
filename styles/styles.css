@@ -31,6 +31,12 @@
   border: 0;
 }
 
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .modal__header .modal__close:before {
   content: "\2715";
 }

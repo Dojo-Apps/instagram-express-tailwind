@@ -55,6 +55,7 @@ Shopify.Webhooks.Registry.addHandler("APP_UNINSTALLED", {
   path: "/webhooks",
   webhookHandler: async (topic, shop, body) => {
     delete ACTIVE_SHOPIFY_SHOPS[shop];
+    await User.findOneAndDelete({ shop });
   },
 });
 
@@ -120,6 +121,8 @@ export async function createServer(
           { encode: false }
         )
       );
+
+      console.log(resp);
       const { access_token: accessToken, user_id: userID } = resp.data;
 
       const shopOrigin = req.cookies.shopOrigin;
@@ -154,7 +157,6 @@ export async function createServer(
       res.redirect(
         `https://${shopOrigin}/admin/apps/${process.env.SHOPIFY_API_KEY}`
       );
-
     } catch (error) {
       console.log(error);
     }

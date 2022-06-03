@@ -6,9 +6,11 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import LoadingOverlay from "react-loading-overlay";
 import FeedDetails from "../components/FeedDetails";
+import MicroModal from "micromodal";
 
 function HomePage() {
   const app = useAppBridge();
+  const [open, setOpen] = useState(false);
   const instagramRedirectURL = process.env.HOST + "/oauth/callback/";
   const instagramAppID = process.env.INSTA_APP_ID;
   const clientAccess = process.env.INSTA_CLIENT_ACCESS;
@@ -84,6 +86,7 @@ function HomePage() {
     // show loading screen...
     setIsLoading(true);
     fetchUser();
+    MicroModal.init({ awaitCloseAnimation: true });
   }, []); // runs once the app loads
 
   // 2
@@ -270,7 +273,10 @@ function HomePage() {
                       Disconnect Instagram Account
                     </Button>
                   ) : null}
-                  <Button variant="contained" onClick={() => console.log(user)}>
+                  <Button
+                    variant="contained"
+                    onClick={() => MicroModal.show("modal-2")}
+                  >
                     Help
                   </Button>
                 </Grid>
@@ -291,6 +297,75 @@ function HomePage() {
               onPhotoTagsSaved={onPhotoTagsSaved}
               user={user}
             />
+          </div>
+          <div
+            class="modal__help micromodal-slide"
+            id="modal-2"
+            aria-hidden="true"
+          >
+            <div
+              class="modal__overlay__help"
+              tabindex="-1"
+              data-micromodal-close
+            >
+              <div
+                class="modal__container__help"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-1-title"
+              >
+                <header class="modal__header__help">
+                  <h2 class="modal__title__help" id="modal-1-title">
+                    How to set up Instagram Pro
+                  </h2>
+                </header>
+                <main class="modal__content__help" id="modal-1-content">
+                  <p>
+                    Instructions:
+                    <br />
+                    <br />
+                    1. Connect your Instagram account by clicking ‘Connect
+                    Instagram Account’. If you are signed in to instagram on
+                    your browser, it will automatically connect to that account.
+                    Log out of your browser’s instagram account to connect to
+                    another account.
+                    <br />
+                    <br />
+                    2. Create a ‘Feed Title’ to begin creating a new feed.
+                    <br />
+                    <br />
+                    3. Select the images you would like to add to your display
+                    feed. Your display feed is what will be shown on your
+                    shopify store (the app block). Make sure to “save” any
+                    changes you make to the display feed like adding or removing
+                    photos.
+                    <br />
+                    <br /> 4. Click on images in your display feed to tag
+                    products. These tags will allow customers to click and
+                    navigate to your selected products.
+                    <br />
+                    <br />
+                    5. To remove product tags, deselect products from the
+                    resource picker.
+                    <br />
+                    <br />
+                    6. The “selected feed” will be the feed that appears in your
+                    store’s app block.
+                    <br />
+                    <br />
+                    7. Add your Instagram feed app block to your theme: a.
+                    Navigate to Online Store>Themes>Customize. b. On the
+                    left-hand menu, select a section and click add app block. c.
+                    Insert the Instagram Feed App Block. Your Instagram feed
+                    should appear. —-- Display your Instagram feed directly in
+                    your Shopify store with Dojo Apps’ Instagram Feed Pro.
+                    Instagram Feed Pro allows merchants to create a seamless
+                    social media experience in their store, enabling social
+                    proof and branding.
+                  </p>
+                </main>
+              </div>
+            </div>
           </div>
         </LoadingOverlay>
       </body>
